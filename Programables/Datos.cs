@@ -21,5 +21,15 @@ namespace Programables
                 return null;
             }
         }
+
+        public bool ejecutar(string consulta)
+        {
+            try {
+                MySqlCommand cmd = new MySqlCommand(consulta, Conexion());
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex) { return false; }
+        }
     }
 }

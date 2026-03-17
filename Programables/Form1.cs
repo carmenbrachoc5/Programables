@@ -4,7 +4,7 @@ namespace Programables
     public partial class Form1 : Form
     {
         SerialPort serialPort = new SerialPort();
-
+        Datos dt= new Datos();
         public Form1()
         {
             InitializeComponent();
@@ -18,6 +18,8 @@ namespace Programables
         private void DataReceive(object sender, SerialDataReceivedEventArgs e)
         {
             string data = serialPort.ReadLine();
+            dt.ejecutar($"Insert Into Temperaturas(temperatura,fecha,hora) Values({data}," +
+                $"'{DateTime.Now.ToString("yyyy-MM-dd")}','{DateTime.Now.ToString("HH:mm")}');");
             this.Invoke(new MethodInvoker(delegate {
                 rtbMenssage.AppendText(data + Environment.NewLine);
             }));
